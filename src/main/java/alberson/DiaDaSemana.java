@@ -12,7 +12,7 @@ public enum DiaDaSemana {
     SEXTA  (0b0000010), //  2
     SABADO (0b0000001); //  1
 
-    private int valor;
+    public int valor;
 
     DiaDaSemana(int valor) {
         this.valor = valor;
@@ -37,5 +37,9 @@ public enum DiaDaSemana {
 
     public static boolean trabalha(int valor, DiaDaSemana dia) {
         return ((valor & dia.valor) == dia.valor);
+    }
+
+    public static boolean trabalha(int valor, int dia) {
+        return ((valor & dia) == dia);
     }
 }

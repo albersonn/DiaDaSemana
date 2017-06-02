@@ -8,8 +8,8 @@ public class TesteDiaDaSemana {
     public void testarDiaDaSemana() {
         int diasDeTrabalho = 42;
         assertFalse(DiaDaSemana.trabalha(diasDeTrabalho, DiaDaSemana.TERCA));
-
-        assertThat("Contém terça", DiaDaSemana.obterDiasTrabalho(diasDeTrabalho), hasItem(DiaDaSemana.SEGUNDA));
+        assertTrue(DiaDaSemana.trabalha(diasDeTrabalho, DiaDaSemana.QUARTA.valor | DiaDaSemana.SEXTA.valor));
+        assertThat("Contém Segunda", DiaDaSemana.obterDiasTrabalho(diasDeTrabalho), hasItem(DiaDaSemana.SEGUNDA));
     }
 
     @Test(expected = IllegalArgumentException.class)
