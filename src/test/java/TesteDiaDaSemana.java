@@ -4,21 +4,26 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 public class TesteDiaDaSemana {
+
     @Test
-    public void testarDiaDaSemana() {
+    public void deveTrabalharDeSegundaESexta() {
         int diasDeTrabalho = 42;
-        assertFalse(DiaDaSemana.trabalha(diasDeTrabalho, DiaDaSemana.TERCA));
-        assertTrue(DiaDaSemana.trabalha(diasDeTrabalho, DiaDaSemana.QUARTA.valor | DiaDaSemana.SEXTA.valor));
-        assertThat("Contém Segunda", DiaDaSemana.obterDiasTrabalho(diasDeTrabalho), hasItem(DiaDaSemana.SEGUNDA));
+        assertTrue(DiaDaSemana.trabalha(diasDeTrabalho, DiaDaSemana.SEGUNDA | DiaDaSemana.SEXTA));
+    }
+
+    @Test
+    public void deveConterQuintaEDomingo() {
+        int diasDeTrabalho = 0b1000101;
+        assertThat(DiaDaSemana.obterDiasTrabalho(diasDeTrabalho), hasItems(DiaDaSemana.EDiaDaSemana.QUINTA, DiaDaSemana.EDiaDaSemana.DOMINGO));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testarRangeMaiorQuePermitido() {
+    public void deveEstarComORangeMaior() {
         DiaDaSemana.obterDiasTrabalho(130);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testarRangeMenorQuePermitido() {
+    public void deveEstarComORangeMenor() {
         DiaDaSemana.obterDiasTrabalho(-1);
     }
 }
